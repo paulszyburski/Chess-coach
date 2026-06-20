@@ -1,26 +1,29 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 import { useRouter } from 'expo-router'
 
 import Spacer from "../components/Spacer"
+import ThemedText from '../components/ThemedText'
+import ThemedView from '../components/ThemedView'
+import ThemedButton from '../components/ThemedButton'
 
 const index = () => {
   const router = useRouter()
 
   const handlePress = () => {
-    router.push('/connectAcc')
+    router.push('/choosePlatform')
   }
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome!</Text>
+    <ThemedView style={styles.container}>
+      <ThemedText style={styles.title} title>Welcome!</ThemedText>
       <Spacer/>
-      <Pressable 
+      <ThemedButton 
       style={({pressed}) => [styles.btn, pressed && styles.pressed]}
       onPress={handlePress}
       >
-        <Text style={{color:'#fff'}}>Continue</Text>
-      </Pressable>
-    </View>
+        <ThemedText style={styles.btnText}>Continue</ThemedText>
+      </ThemedButton>
+    </ThemedView>
   )
 }
 
@@ -41,5 +44,8 @@ const styles = StyleSheet.create({
       padding: 18,
       borderRadius: 6,
       marginVertical: 10,
-    }
+    },
+    btnText: {
+      color: '#fff',
+    },
 })
