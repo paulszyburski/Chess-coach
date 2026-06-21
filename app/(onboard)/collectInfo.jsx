@@ -10,15 +10,29 @@ import ThemedView from '../../components/ThemedView'
 
 
 const collectInfo = () => {
-  const { user } = useUser()
+  const { user, setUser } = useUser()
   const [stats, setStats] = useState(null)
+  const [pfp, setPfp] = useState(null)
 
   const getStats = async () => {
-    const response = await fetch(
+    const statsResponse = await fetch(
       `http://192.168.0.166:8000/stats/${user.platform_username}?platform=${user.platform}`
     )
-    const data = await response.json()
-    setStats(data)
+    const pfpResponse = await fetch(
+      `http://192.168.0.166:8000/profile-picture/${user.platform_username}?platform=${user.platform}`
+    )
+
+    const stats = await statsResponse.json()
+    const pfp = await pfpResponse.json()
+
+    setStats(stats)
+    setPfp(pfp)
+
+    setUser((prev) => ({
+      ...prev,
+      stats: stats,
+      pfpUrl: pfp
+    }))
   }
 
   useEffect(() => {

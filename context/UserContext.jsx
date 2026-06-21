@@ -7,6 +7,8 @@ export function UserProvider({ children }) {
     platform: '',
     platform_username: '',
     rating: null,
+    stats: null,
+    pfpUrl: null,
   })
 
   return (
